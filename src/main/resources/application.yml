@@ -1,0 +1,79 @@
+# 是否debug调试
+#debug: true
+spring:
+  #  数据库配置
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/dubbo?serverTimezone=UTC
+    username: root
+    password: 123456
+    druid:
+      initial-size: 5
+      # 配置获取连接等待超时的时间  
+      max-wait: 60000
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      time-between-eviction-runs-millis: 60000
+      # 配置一个连接在池中最小生存的时间，单位是毫秒 
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 1 FROM DUAL
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      # 打开PSCache，并且指定每个连接上PSCache的大小
+      pool-prepared-statements: true
+      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      # 合并多个DruidDataSource的监控数据 
+      use-global-data-source-stat: true
+  banner:
+    charset: utf-8
+    location: banner.txt
+  # redis 配置
+  redis:
+    database: 0
+    host: localhost
+    port: 6379
+    password:
+    lettuce:
+      pool:
+        max-active: 8
+        max-wait: -1ms
+        max-idle: 8
+        min-idle: 0
+    timeout: 5000ms
+    expireTime: 180
+  mvc:
+    static-path-pattern: /static/**
+# mybatis配置
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  check-config-location: true
+  type-aliases-package: com.smepublish.demo.pojo
+# 分页配置
+pagehelper:
+  auto-dialect: true
+  close-conn: false
+  reasonable: true
+server:
+  port: 8099
+  tomcat:
+    uri-encoding: UTF-8
+#shiro 加密配置
+shiro:
+  hash-algorithm: ENC@[zWBvbRCRbqg1NzD3c10vpg==]
+  hash-iteration: ENC@[AWP+QIn5FHNszYV/ZFYV/g==]
+#加密解密配置
+jasypt:
+  encryptor:
+    #密钥
+    password: shiro@jasypt
+    property:
+      prefix: "ENC@["
+      suffix: "]"
+# 小米推送配置
+myApp:
+  appId: bha652ljMrttaFXfBsE1Gbtg-gzGzoHsz
+  appKey: ErBzMIfjSIYYaKf9FJuYkzmI
+  appMasterKey: r29LPoxwCjMWEGtmbyzi52XD
+  APP_SECRET_KEY: ZBOjPAkKBmf1EMG1Gpldiw==
+  MY_PACKAGE_NAME: com.smeyun.app
